@@ -6,7 +6,7 @@ import torch
 
 app = Potassium("diffusion")
 
-@app.init()
+@app.init
 def init():
     model_id = "runwayml/stable-diffusion-v1-5"
     device = 0 if torch.cuda.is_available() else -1
