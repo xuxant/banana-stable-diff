@@ -25,7 +25,7 @@ def handler(context:dict, request: Request) -> Response:
     prompt = request.json.get("prompt")
     model = context.get("model")
 
-    image = model(prompt).images[0]
+    image = model(prompt, output_type=str).images[0]
 
     return Response(
         json={"output": image},
