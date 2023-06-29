@@ -26,10 +26,9 @@ def handler(context:dict, request: Request) -> Response:
     model = context.get("model")
 
     image = model(prompt).images[0]
-    result = image.base64()
 
     return Response(
-        json={"output": result},
+        json={"output": image},
         status=200,
     )
 
