@@ -1,0 +1,5 @@
+transformers==4.24.0
+potassium
+sentencepiece
+accelerate
+diffusers
