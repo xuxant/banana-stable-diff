@@ -1,5 +1,8 @@
 from potassium import Potassium, Request, Response
 from diffusers import StableDiffusionPipeline
+from io import BytesIO
+import os
+import base64
 
 from transformers import pipeline
 import torch
@@ -25,10 +28,14 @@ def handler(context:dict, request: Request) -> Response:
     prompt = request.json.get("prompt")
     model = context.get("model")
 
-    image = model(prompt, output_type=str).images[0]
+    image = model(prompt).images[0]
+    buffered = BytesIO()
+
+    image.save(buffered, format="JPEG")
+    image_b64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
     return Response(
-        json={"output": image},
+        json={"output": image_b64},
         status=200,
     )
 
