@@ -35,7 +35,7 @@ def handler(context:dict, request: Request) -> Response:
     image_b64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
     return Response(
-        json={"output": image_b64},
+        json={"output": image_b64, "format": "base64"},
         status=200,
     )
 
